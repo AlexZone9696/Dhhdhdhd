@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+        .balance {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+        .coin {
+            width: 100px;
+            height: 100px;
+            background-color: gold;
+            border-radius: 50%;
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .footer {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+        .footer div {
+            text-align: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Привет, <span id="userName"></span> <span id="userSurname"></span>!</h1>
+    
+    <div class="balance">
+        Баланс: <br>
+        USDT: <span id="usdtBalance">0.00</span> <br>
+        TRX: <span id="trxBalance">0.00</span>
+    </div>
+
+    <div class="coin" id="coin" onmousedown="startHolding()" onmouseup="stopHolding()" onmouseleave="stopHolding()">
+        💰
+    </div>
+
+    <div class="footer">
+        <div>🎰 Рулетка</div>
+        <div>👥 Друзья</div>
+        <div>📊 Статистика</div>
+        <div>💼 Кошелек</div>
+    </div>
+
+    <script>
+        let holdTimer;
+        let usdtBalance = 0.00;
+        let trxBalance = 0.00;
+
+        // Имитация получения данных пользователя (имя, фамилия)
+        const userData = {
+            firstName: "Имя",
+            lastName: "Фамилия"
+        };
+
+        document.getElementById('userName').innerText = userData.firstName;
+        document.getElementById('userSurname').innerText = userData.lastName;
+
+        function startHolding() {
+            holdTimer = setTimeout(() => {
+                usdtBalance += 0.1; // Увеличение баланса на 0.1 USDT
+                document.getElementById('usdtBalance').innerText = usdtBalance.toFixed(2);
+                alert("Вы получили 0.1 USDT!");
+            }, 30000); // Удерживать 30 секунд
+        }
+
+        function stopHolding() {
+            clearTimeout(holdTimer);
+        }
+    </script>
+</body>
+</html>
